@@ -60,7 +60,6 @@ function upload() {
 
     const feedback = await ai.feedback(
       uploadedFile.path,
-      // "You Are An Expert In ATS (applicant tracking system) and resume analysis...",
       prepareInstructions({ jobTitle, jobDescription, AIResponseFormat }),
     );
     if (!feedback) return setStatusText("Error: Failed to analyze resume");
@@ -74,6 +73,7 @@ function upload() {
     await kv.set(`resume:${uuid}`, JSON.stringify(data));
     setStatusText("Analysis complete, redirecting...");
     console.log(data);
+    navigate(`/resume/${uuid}`);
   };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

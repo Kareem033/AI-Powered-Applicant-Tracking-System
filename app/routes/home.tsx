@@ -17,6 +17,7 @@ export default function Home() {
   const { isLoading, auth } = usePuterStore();
   const navigate = useNavigate();
   useEffect(() => {
+    if (isLoading) return;
     if (!auth.isAuthenticated) navigate("/auth?next=/");
   }, [auth.isAuthenticated]);
   return (
